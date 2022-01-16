@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Implementação_AMS
 {
-    class Cliente
+    class Cliente : IEquatable<Cliente>
     {
         #region atributos
         string nomeCliente;
@@ -35,6 +35,61 @@ namespace Implementação_AMS
             }
             return false;
         }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Cliente);
+        }
+
+        public bool Equals(Cliente other)
+        {
+            return other != null &&
+                   nomeCliente == other.nomeCliente &&
+                   numCliente == other.numCliente;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = 132735665;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(nomeCliente);
+            hashCode = hashCode * -1521134295 + numCliente.GetHashCode();
+            return hashCode;
+        }
         #endregion
+
+        #region propriedades
+        public string NomeCliente
+        {
+            get
+            {
+                return nomeCliente;
+            }
+            set
+            {
+                nomeCliente = value;
+            }
+        }
+        public int NumCliente
+        {
+            get
+            {
+                return numCliente;
+            }
+        }
+
+        #endregion
+
+        #region overrides
+        public static bool operator ==(Cliente left, Cliente right)
+        {
+            return EqualityComparer<Cliente>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(Cliente left, Cliente right)
+        {
+            return !(left == right);
+        }
+        #endregion
+
     }
 }

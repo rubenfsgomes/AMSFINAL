@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Implementação_AMS
 {
-    class Psicólogo
+    class Psicólogo : IEquatable<Psicólogo>
     {
         #region atributos
         string nomePsicologo;
@@ -24,7 +24,6 @@ namespace Implementação_AMS
         {
             this.nomePsicologo = nomePsicologo ?? throw new ArgumentNullException(nameof(nomePsicologo));
             this.numEmp = numEmp;
-            this.atividades = new List<Atividade>();
             this.consultas = new List<Consulta>();
         }
         #endregion
@@ -101,6 +100,39 @@ namespace Implementação_AMS
                 }
             }
             return false;
+        }
+
+        #endregion
+
+        #region overrides
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Psicólogo);
+        }
+
+        public bool Equals(Psicólogo other)
+        {
+            return other != null &&
+                   nomePsicologo == other.nomePsicologo &&
+                   numEmp == other.numEmp;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -1466580540;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(nomePsicologo);
+            hashCode = hashCode * -1521134295 + numEmp.GetHashCode();
+            return hashCode;
+        }
+
+        public static bool operator ==(Psicólogo left, Psicólogo right)
+        {
+            return EqualityComparer<Psicólogo>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(Psicólogo left, Psicólogo right)
+        {
+            return !(left == right);
         }
         #endregion
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Implementação_AMS
 {
-    class Atividade
+    class Atividade : IEquatable<Atividade>
     {
         #region Atributos
         int id;
@@ -26,7 +26,7 @@ namespace Implementação_AMS
             this.responsável = responsável ?? throw new ArgumentNullException(nameof(responsável));
             Clientes = new List<Cliente>();
             this.tipoAtividade = tipoAtividade ?? throw new ArgumentNullException(nameof(tipoAtividade));
-            this.descAtividade = descAtividade ?? throw new ArgumentNullException(nameof(descAtividade));
+            this.descAtividade = descAtividade;
         }
         #endregion
 
@@ -60,6 +60,35 @@ namespace Implementação_AMS
             {
                 descAtividade = value;
             }
+        }
+
+        #endregion
+
+        #region overrides
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Atividade);
+        }
+
+        public bool Equals(Atividade other)
+        {
+            return other != null &&
+                   id == other.id;
+        }
+
+        public override int GetHashCode()
+        {
+            return 1877310944 + id.GetHashCode();
+        }
+
+        public static bool operator ==(Atividade left, Atividade right)
+        {
+            return EqualityComparer<Atividade>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(Atividade left, Atividade right)
+        {
+            return !(left == right);
         }
         #endregion
     }

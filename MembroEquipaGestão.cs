@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Implementação_AMS
 {
-    class MembroEquipaGestão
+    class MembroEquipaGestão : IEquatable<MembroEquipaGestão>
     {
         #region Atributos
         string nome;
@@ -42,6 +42,26 @@ namespace Implementação_AMS
                 atividades = value;
             }
         }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as MembroEquipaGestão);
+        }
+
+        public bool Equals(MembroEquipaGestão other)
+        {
+            return other != null &&
+                   nome == other.nome &&
+                   numEmp == other.numEmp;
+        }
+
+        public override int GetHashCode()
+        {
+            int hashCode = -158158361;
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(nome);
+            hashCode = hashCode * -1521134295 + numEmp.GetHashCode();
+            return hashCode;
+        }
         #endregion
 
         #region Metodos
@@ -57,6 +77,19 @@ namespace Implementação_AMS
             {
                 return false;
             }
+        }
+
+        #endregion
+
+        #region overrides
+        public static bool operator ==(MembroEquipaGestão left, MembroEquipaGestão right)
+        {
+            return EqualityComparer<MembroEquipaGestão>.Default.Equals(left, right);
+        }
+
+        public static bool operator !=(MembroEquipaGestão left, MembroEquipaGestão right)
+        {
+            return !(left == right);
         }
         #endregion
 
