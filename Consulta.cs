@@ -61,6 +61,18 @@ namespace Implementação_AMS
                    dataHoraConsulta == other.dataHoraConsulta;
         }
 
+        public override int GetHashCode()
+        {
+            int hashCode = -1161400505;
+            hashCode = hashCode * -1521134295 + dataHoraConsulta.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<Psicólogo>.Default.GetHashCode(psicólogo);
+            hashCode = hashCode * -1521134295 + EqualityComparer<Cliente>.Default.GetHashCode(cliente);
+            hashCode = hashCode * -1521134295 + id.GetHashCode();
+            hashCode = hashCode * -1521134295 + DataConsulta.GetHashCode();
+            hashCode = hashCode * -1521134295 + ID.GetHashCode();
+            return hashCode;
+        }
+
         public static bool operator ==(Consulta left, Consulta right)
         {
             return EqualityComparer<Consulta>.Default.Equals(left, right);

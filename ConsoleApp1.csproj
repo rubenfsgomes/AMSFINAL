@@ -46,6 +46,7 @@
     <Compile Include="Atividade.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Consulta.cs" />
+    <Compile Include="Empresa.cs" />
     <Compile Include="MembroEquipaGestão.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

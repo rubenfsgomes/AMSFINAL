@@ -42,6 +42,13 @@ namespace Implementação_AMS
                 atividades = value;
             }
         }
+        public int NumEmp
+        {
+            get
+            {
+                return numEmp;
+            }
+        }
 
         public override bool Equals(object obj)
         {

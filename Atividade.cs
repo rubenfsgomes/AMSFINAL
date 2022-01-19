@@ -26,7 +26,6 @@ namespace Implementação_AMS
             this.responsável = responsável ?? throw new ArgumentNullException(nameof(responsável));
             Clientes = new List<Cliente>();
             this.tipoAtividade = tipoAtividade ?? throw new ArgumentNullException(nameof(tipoAtividade));
-            this.descAtividade = descAtividade;
         }
         #endregion
 
